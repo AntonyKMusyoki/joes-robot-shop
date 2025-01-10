@@ -1,3 +1,21 @@
+a {
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+
+.strikethrough {
+  text-decoration: line-through;
+  font-size: 18px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
