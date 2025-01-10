@@ -1,0 +1,25 @@
+<div class="product">
+    <div class="product-details">
+      <img [src]="getImageUrl(productDetails)" [alt]="productDetails.name" />
+      <div class="product-info">
+        <!-- inside an interpolation expresssion we can directly access properties -->
+        <!-- on our catalog component from this template. The interpolation is a binding --> 
+        <!-- to data to the property - changes in the property are re-rendered and -->
+        <!-- reflected in the browser. The interpolation expression is a binding to the -->
+        <!-- property and if property data changes that data will change in the browser -->
+        <div class="name">{{ productDetails.name }}</div>
+        <div class="description"> {{ productDetails.description }}</div>
+        <div class="category">Part Type: {{ productDetails.category }} </div>
+      </div>
+    </div>
+    <div class="price">
+      <div 
+      style="font-weight: bolder;" 
+      [ngStyle]="{color: productDetails.discount > 0 ? 'green' : ''}"
+      [ngClass]="getDiscountedClasses(productDetails)">{{ productDetails.price | currency:'GBP' }}</div>
+      <div *ngIf="productDetails.discount > 0" class="discount">
+        {{ (productDetails.price * (1 - productDetails.discount)) | currency:'GBP' }}
+      </div>
+      <button class="cta" (click)="buyButtonClicked(productDetails)">Buy</button>
+    </div>
+  </div>

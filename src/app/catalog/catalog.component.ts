@@ -14,6 +14,7 @@ export class CatalogComponent {
   //Array does not allow for null
   //products: IProduct[]; 
   filter: string = '';
+  cart: IProduct[] = [];
 
   constructor() {
     this.products = [
@@ -193,15 +194,9 @@ export class CatalogComponent {
     ];
   }
 
-  getDiscountedClasses(product: IProduct) {
-    if (product.discount > 0 ) return ['strikethrough', 'bold'];
-    else return [];
-    //return {strikethrough: product.discount > 0}
-  }
-
-  getImageUrl (product: IProduct) {
-    if (!product) return '';
-    return '/assets/images/robot-parts/' + product.imageName;
+  addToCart(product: IProduct) {
+    this.cart.push(product);
+    console.log(`product ${product.name} added to cart`);
   }
 
   getFilterProducts() {

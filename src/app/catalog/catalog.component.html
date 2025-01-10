@@ -10,32 +10,10 @@
     </div>
   
     <ul class="products">
-      <li class="product-item" *ngFor="let product of getFilterProducts()">
-        <div class="product">
-          <div class="product-details">
-            <img [src]="getImageUrl(product)" [alt]="product?.name" />
-            <div class="product-info">
-              <!-- inside an interpolation expresssion we can directly access properties -->
-              <!-- on our catalog component from this template. The interpolation is a binding --> 
-              <!-- to data to the property - changes in the property are re-rendered and -->
-              <!-- reflected in the browser. The interpolation expression is a binding to the -->
-              <!-- property and if property data changes that data will change in the browser -->
-              <div class="name">{{ product?.name }}</div>
-              <div class="description"> {{ product?.description }}</div>
-              <div class="category">Part Type: {{ product?.category }} </div>
-            </div>
-          </div>
-          <div class="price">
-            <div 
-            style="font-weight: bolder;" 
-            [ngStyle]="{color: product.discount > 0 ? 'green' : ''}"
-            [ngClass]="getDiscountedClasses(product)">{{ product?.price | currency:'GBP' }}</div>
-            <div *ngIf="product.discount > 0" class="discount">
-              {{ (product.price * (1 - product.discount)) | currency:'GBP' }}
-            </div>
-            <button class="cta">Buy</button>
-          </div>
-        </div>
+      <li class="product-item" *ngFor="let currentProduct of getFilterProducts()">
+        <bot-product-details 
+        [productDetails]="currentProduct"
+        (buy)="addToCart(currentProduct)"></bot-product-details>
       </li>
     </ul>
   </div>
