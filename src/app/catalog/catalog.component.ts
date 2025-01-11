@@ -17,7 +17,7 @@ export class CatalogComponent {
   filter: string = '';
   //cart: IProduct[] = [];
 
-  //Alternative to dependency injection to inject Function
+  //Alternative to constructor injection is inject Function
   //This method has advantage of being easier to read
   //It has drawback during writing unit tests as this could be in 
   //certain situations limited in how those unit tests are written
