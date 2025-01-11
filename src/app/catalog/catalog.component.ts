@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IProduct } from './product.model';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'bot-catalog',
@@ -14,9 +15,20 @@ export class CatalogComponent {
   //Array does not allow for null
   //products: IProduct[]; 
   filter: string = '';
-  cart: IProduct[] = [];
+  //cart: IProduct[] = [];
 
-  constructor() {
+  //Alternative to dependency injection to inject Function
+  //This method has advantage of being easier to read
+  //It has drawback during writing unit tests as this could be in 
+  //certain situations limited in how those unit tests are written
+  //As a result the contructor syntax is recommended over inject function
+  private CartSvs2: CartService = inject(CartService);
+
+  //Can make the service variable 'protected' which will make sure
+  //that the variable gets put onto the class. This gives the component
+  //a handle through the cartSvc variable to the CartService
+  //This is dependency injection thought the constructor
+  constructor(private cartSvc: CartService) {
     this.products = [
       {
         id: 1,
@@ -194,9 +206,12 @@ export class CatalogComponent {
     ];
   }
 
+  // addToCart(product: IProduct) {
+  //   this.cart.push(product);
+  //   console.log(`product ${product.name} added to cart`);
+  // }
   addToCart(product: IProduct) {
-    this.cart.push(product);
-    console.log(`product ${product.name} added to cart`);
+    this.cartSvc.add(product);
   }
 
   getFilterProducts() {
