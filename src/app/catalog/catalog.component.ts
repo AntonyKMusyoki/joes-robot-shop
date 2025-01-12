@@ -66,9 +66,16 @@ export class CatalogComponent {
     //When a new params object is published we will call a function. Each time 
     //URL changes a new params will be published and filter can be set from it.  
     //If filter is not provided set filter to empty string   
-    this.route.params.subscribe((params) => {
+//    this.route.params.subscribe((params) => {
+//      this.filter = params['filter'] ?? '';
+//    });
+
+    //Update catalog to read query params instead of route params
+    this.route.queryParams.subscribe((params) => {
       this.filter = params['filter'] ?? '';
     });
+
+
   }
 
   // addToCart(product: IProduct) {

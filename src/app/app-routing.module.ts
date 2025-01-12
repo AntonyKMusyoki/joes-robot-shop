@@ -10,7 +10,10 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, title: "Home -  Joes Robot Shop"},
   //colon (:) signals to Angular router that this part of the URL path will 
   //actually be a route parameter. Name of the route parameter is filter
-  {path: 'catalog/:filter', component: CatalogComponent, title: "Catalog -  Joes Robot Shop"},
+  // {path: 'catalog/:filter', component: CatalogComponent, title: "Catalog -  Joes Robot Shop"},
+  //Query String Parameters do not meed to be defined. So filter param from above 
+  //has been removed below
+  {path: 'catalog', component: CatalogComponent, title: "Catalog -  Joes Robot Shop"},
   {path: 'cart', component: CartComponent, title: "Cart -  Joes Robot Shop"},
   {path: '', redirectTo: '/home', pathMatch: 'prefix'}
 ];
