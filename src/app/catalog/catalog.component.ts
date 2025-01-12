@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { IProduct } from './product.model';
-import { CartService } from '../cart.service';
+import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'bot-catalog',
@@ -31,7 +32,9 @@ export class CatalogComponent {
   //This is dependency injection thought the constructor
   constructor(
     private cartSvc: CartService, 
-    private productSvc: ProductService
+    private productSvc: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   //ngOnInit is lifecycle method that runs when component initializes
@@ -44,7 +47,28 @@ export class CatalogComponent {
     //anything yet. The method returns an observable that we need to subscribe to
     this.productSvc.getProducts().subscribe(products => {
       this.products = products;
-    })
+    });
+    //This snapshot is a single point in time snapshot of the current URL information
+    //route.snapshot has a params object. The params object as properties for each 
+    //route parameter on the URL that we define in our routes. 
+    //snapshot is set when the catalog component is first loaded and it works when 
+    //linking to this component from another component like from the home page. It 
+    //runs into trouble if we link from the component from itself because the 
+    //component is already loaded. When you link to the component from itself it 
+    //will not reload the component, whic means this snapshot will be stale.
+//    this.filter = this.route.snapshot.params['filter'];   
+    
+        
+    //Alternative it using snapshots due to its shortcomings is to setup a 
+    //subscription that listens to changes to the route parameters. Therefore 
+    //access the route params directly with route.params subscribe. 
+    //Params is an observable and that subscription publishes a param object. 
+    //When a new params object is published we will call a function. Each time 
+    //URL changes a new params will be published and filter can be set from it.  
+    //If filter is not provided set filter to empty string   
+    this.route.params.subscribe((params) => {
+      this.filter = params['filter'] ?? '';
+    });
   }
 
   // addToCart(product: IProduct) {
@@ -53,6 +77,12 @@ export class CatalogComponent {
   // }
   addToCart(product: IProduct) {
     this.cartSvc.add(product);
+    
+    //Navigate to cart page after adding item to cart
+    //Navigate() function accepts an array param that works
+    //like the routerLink parameter. Simply provide URL segments
+    //as selements of the array
+    this.router.navigate(['/cart']);
   }
 
   getFilterProducts() {
