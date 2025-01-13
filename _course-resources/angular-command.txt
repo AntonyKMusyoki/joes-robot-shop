@@ -14,3 +14,5 @@ ng generate module <modulename> --flat --module=app
 --flat <- prevent CLI from adding module in its own folder
 --module <- Import module to existoing <app> module
 
+
+ng g m <modulename>
