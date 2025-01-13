@@ -1,0 +1,16 @@
+ng generate component <componentname>
+
+ng g c <componentname>
+
+ng g c <componentfolder(s)><componentname>
+
+ng generate service <servicename>
+
+ng g s <servicename>
+
+ng g s <servicefolder(s)><servicename>
+
+ng generate module <modulename> --flat --module=app
+--flat <- prevent CLI from adding module in its own folder
+--module <- Import module to existoing <app> module
+

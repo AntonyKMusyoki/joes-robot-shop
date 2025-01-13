@@ -1,0 +1,75 @@
+<div class="container">
+    <!-- ngForm directive provides information about the form  -->
+    <form #signInform="ngForm" class="form" (ngSubmit)="signIn()">
+      <img class="logo" src="/assets/images/logo.png" />
+      <div class="sign-in">Sign In</div>
+      <div class="sub-text">to acquire awesome bots</div>
+      <input         
+        name="email"
+        required
+        email
+        #email="ngModel"
+        [(ngModel)]="credentials.email"
+        placeholder="Email Address"
+        type="text"
+      />
+      <!-- Emphasis element. Standard HTML element -->
+      <!-- Only display if the email element is not valid and has neen touched -->
+      <!-- <em class="error" *ngIf="email.invalid && email.touched">Email is required</em> -->
+      <!-- Show message only if the errors object has a required property. The email object -->
+      <!-- won't always have an errors property. It only has that property if errors exist -->
+      <!-- Use the safe navigation operator (?) inorder to check if the errors property has a -->
+      <!-- required property -->
+      <em class="error" *ngIf="email.errors?.['required'] && email.touched">Email is required</em>
+      <em class="error" *ngIf="email.errors?.['email'] && email.touched">Must be a valid email format</em>
+      {{credentials.email}}
+      <input        
+        name="password"
+        required
+        #password="ngModel"
+        [(ngModel)]="credentials.password"
+        placeholder="Password"
+        type="password"
+      />
+      <em class="error" *ngIf="password.invalid && password.touched">Password is required</em>
+      <div class="buttons">
+        <!-- disable submit button if form elements are invalid -->
+        <!-- Bind disable attribute to an expression. If expression -->
+        <!-- evaluates to true button will be disabled.  -->  
+        <button type="submit" [disabled]="signInform.form.invalid" class="button cta">
+          Sign In
+        </button>        
+      </div>
+      <div class="signInError" *ngIf="signInError">
+        Sign-in Failed. Please try again.
+      </div>
+    </form>
+    <div class="form-info">
+      <div>
+        <b>Form Information (from signInform template var)</b>
+        <br/>
+        <label>signInform.valid:</label> {{signInform.valid}}<br/>
+        <label>signInform.invalid:</label> {{signInform.invalid}}<br/>
+        <br/>
+        <label>signInform.dirty:</label> {{signInform.dirty}}<br/>
+        <label>signInform.pristine:</label> {{signInform.pristine}}<br/>
+        <br/>
+        <label>signInform.touched:</label> {{signInform.touched}}<br/>
+        <label>signInform.untouched:</label> {{signInform.untouched}}<br/>
+        <br/>
+        <label>signInform.submitted:</label> {{signInform.submitted}}<br/>
+      </div>
+      <div>
+        <b>Control Information (from email template var)</b>
+        <br/>
+        <label>email.valid:</label> {{email.valid}}<br/>
+        <label>email.invalid:</label> {{email.invalid}}<br/>
+        <br/>
+        <label>email.dirty:</label> {{email.dirty}}<br/>
+        <label>email.pristine:</label> {{email.pristine}}<br/>
+        <br/>
+        <label>email.touched:</label> {{email.touched}}<br/>
+        <label>email.untouched:</label> {{email.untouched}}<br/>
+      </div>
+    </div>
+  </div>

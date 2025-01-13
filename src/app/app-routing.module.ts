@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
+import { SignInComponent } from './user/sign-in/sign-in/sign-in.component';
+import { TemplateFormControlsComponent } from './user/template-form-controls/template-form-controls.component';
 
 //Create array to hold route defininitaitons
 //Routes are objects that map a URL to a component
@@ -15,6 +17,8 @@ const routes: Routes = [
   //has been removed below
   {path: 'catalog', component: CatalogComponent, title: "Catalog -  Joes Robot Shop"},
   {path: 'cart', component: CartComponent, title: "Cart -  Joes Robot Shop"},
+  {path: 'sign-in', component: SignInComponent},
+  {path: 'form-controls', component: TemplateFormControlsComponent},
   {path: '', redirectTo: '/home', pathMatch: 'prefix'}
 ];
 
